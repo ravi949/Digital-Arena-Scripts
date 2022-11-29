@@ -1,0 +1,7 @@
+/**
+ * @NScriptName ClientScript
+ * @NApiVersion 2.0
+ * @NScriptType ClientScript
+ * @NModuleScope SameAccount
+ */
+define(["require","exports","N/runtime","N/record"],function(e,i,s,f){"use strict";Object.defineProperty(i,"__esModule",{value:true});var c="2338541";var o=true;var g=false;var v="custbody_da_add_from_pc";var m="custbody_da_pc_list";var b;var I=[];function pageInit(e){b=e.mode}i.pageInit=pageInit;function fieldChanged(e){if(s.accountId==c){var i=e.currentRecord;var t=i.getValue("purchasecontract");var a=i.getValue(v);if(e.fieldId=="purchasecontract"&&t&&e.sublistId!="item"&&a){if(g){var r=i.getLineCount({sublistId:"item"});if(r){for(var u=0;u<r;u++){i.removeLine({sublistId:"item",line:0})}}}if(b=="edit"){I=i.getValue(m)}var l=I.indexOf(t)==-1?false:true;var d=l?false:true;if(g)d=true;if(l&&o&&!g){d=confirm("The selected purchase contract is already added.\nDo you want to add it again?")}if(d){var n=f.load({type:"purchasecontract",id:Number(t)});for(var u=0;u<n.getLineCount("item");u++){i.setCurrentSublistValue({sublistId:"item",fieldId:"item",value:n.getSublistValue({sublistId:"item",fieldId:"item",line:u}),fireSlavingSync:true,ignoreFieldChange:false});i.setCurrentSublistValue({sublistId:"item",fieldId:"quantity",value:n.getSublistSubrecord({sublistId:"item",fieldId:"itempricing",line:u}).getSublistValue({sublistId:"discount",fieldId:"fromquantity",line:1}),fireSlavingSync:true,ignoreFieldChange:false});i.commitLine({sublistId:"item"})}if(g){I=[t]}else{I.push(t)}i.setValue(m,I)}}}}i.fieldChanged=fieldChanged});

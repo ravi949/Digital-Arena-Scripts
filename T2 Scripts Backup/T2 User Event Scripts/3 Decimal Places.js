@@ -1,0 +1,1 @@
+function beforeLoad(t,e){if(nlapiGetContext().getExecutionContext()=="userinterface"){e.setScript("customscript_da_3_decimal_places")}}
